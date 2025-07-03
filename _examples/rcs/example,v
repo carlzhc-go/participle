@@ -1,0 +1,161 @@
+head	1.8;
+access;
+symbols;
+locks; strict;
+comment	@# @@ world @;
+
+
+1.8
+date	2024.04.29.03.31.43;	author Administrator;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2024.04.10.00.58.56;	author Administrator;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2024.03.25.13.48.21;	author Administrator;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2024.01.31.14.08.55;	author Administrator;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2024.01.31.04.06.22;	author Administrator;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2024.01.26.14.43.04;	author Administrator;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2024.01.26.08.41.41;	author Administrator;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2024.01.26.04.37.06;	author Administrator;	state Exp;
+branches;
+next	;
+
+
+desc
+@Mintty's config file
+@
+
+
+1.8
+log
+@Change function of RightClick[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[Dd
+@
+text
+@Font=Consolas
+FontHeight=11
+ThemeFile=dracula
+BackspaceSendsBS=no
+ClicksPlaceCursor=yes
+MiddleClickAction=extend
+RightClickAction=paste
+Term=xterm-256color
+CursorType=block
+Locale=en_US
+Charset=UTF-8
+@
+
+
+1.7
+log
+@Change locale to en_US.UTF-8
+@
+text
+@d6 2
+a7 2
+MiddleClickAction=paste
+RightClickAction=menu
+@
+
+
+1.6
+log
+@Change Term to xterm-256color
+@
+text
+@d10 2
+@
+
+
+1.5
+log
+@Change Term to xterm-vt220 for Home and End key
+@
+text
+@d3 1
+a3 1
+ThemeFile=mintty
+d6 3
+a8 3
+MiddleClickAction=extend
+RightClickAction=paste
+Term=xterm-vt220
+@
+
+
+1.4
+log
+@Update Mintty settings
+@
+text
+@d3 1
+a3 1
+ThemeFile=dracula
+d8 1
+a8 1
+Term=xterm-256color
+a9 1
+Transparency=low
+@
+
+
+1.3
+log
+@Change theme to mintty
+@
+text
+@d3 2
+a4 2
+ThemeFile=mintty
+BackspaceSendsBS=yes
+d8 1
+a8 1
+Term=xterm
+d10 1
+@
+
+
+1.2
+log
+@Change theme
+@
+text
+@d3 1
+a3 1
+ThemeFile=dracula
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d3 1
+a3 1
+ThemeFile=flat-ui
+@

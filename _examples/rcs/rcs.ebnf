@@ -1,0 +1,47 @@
+rcstext   ::=  admin {delta}* desc {deltatext}*
+
+admin     ::=  "head"         {num} ";"
+               { "branch"     {num} ";" }
+               "access"       {id}* ";"
+               "symbols"      { sym ":" num }* ";"
+               "locks"        { id ":" num }* ";"
+               { "strict" ";" }
+               { "integrity " {intstring} ";" }
+               { "comment"    {string} ";" }
+               { "expand"     {string} ";" }
+
+delta     ::=  num
+               "date"       num ";"
+               "author"     id ";"
+               "state"      {id} ";"
+               "branches"   {num}* ";"
+               "next"       {num} ";"
+               { "commitid" sym ";" }
+
+desc      ::=  "desc"  string
+
+deltatext ::=  num
+               "log"   string
+               "text"  string
+
+num       ::=  { digit | "." }+
+
+digit     ::=  "0" through "9"
+
+id        ::=  { idchar | "." }+
+
+sym       ::=  {idchar}+
+
+idchar    ::=  any visible graphic character except special
+
+special   ::=  "$" | "," | "." | ":" | ";" | "@"
+
+string    ::=  "@" { any character, with @ doubled }* "@"
+
+word      ::=  id | num | string | ":"
+
+intchar   ::=  any character, except @
+
+thirdp    ::=  "^L" {intchar}*
+
+intstring ::= "@" {intchar}* {thirdp}* "@"
