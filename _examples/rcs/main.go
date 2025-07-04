@@ -37,7 +37,7 @@ type Admin struct {
 	Access []string `parser:"'access' @Ident* ';'"`
 	Symbols []Symbol `parser:"'symbols' @@* ';'"`
 	Locks []Lock `parser:"'locks' @@* ';'"`
-	Strict string `parser:"( @Strict ';' )?"`
+	Strict bool `parser:"( @'strict' ';' )?"`
 	Integrity string `parser:"( 'integrity' '@' @Intstring '@' ';')?"`
 	Comment string `parser:"( 'comment' @String ';' )?"`
 	Expand string `parser:"( 'expand' @String ';' )?"`
@@ -76,19 +76,17 @@ type Deltatext struct {
 
 var (
 	rcsLexer = lexer.MustSimple([]lexer.SimpleRule{
-		{"Strict", `\bstrict\b`},
-		{`Keyword`, `\b(head|branch|access|symbols|locks|integrity|comment|expand|date|author|state|branches|next|commitid|desc|log|text)\b`},
-		{`Ident`, `[a-zA-Z_][a-zA-Z0-9_]*`},
 		{"Number", `[0-9][.0-9]+`},
+		{`Keyword`, `\b(head|branch|access|symbols|locks|integrity|comment|expand|date|author|state|branches|next|commitid|desc|log|text|strict)\b`},
 		{"String", `(@[^@]*@)+`},
-		{"Intstring", `(@[^@]*@)+`},
+		{"Intstring", `@[^@]*@`},
+		{`Ident`, `[a-zA-Z0-9_~!#%^&*()_+=\]\[{}|\\"<>~.-]+`},
 		{"whitespace", `\s+`},
 		{"Special", `[$,.:;@]`},
 	})
 
 	rcsParser = participle.MustBuild[RCS](
 		participle.Lexer(rcsLexer),
-		participle.Unquote("String"),
 	)
 
 	cli struct {
