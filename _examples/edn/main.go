@@ -47,10 +47,17 @@ type Form struct {
 	Float   *float64   `parser:"| @Float"`
 	List    []Form     `parser:"| '(' @@* ')'"`
 	Vector  []Form     `parser:"| '[' @@* ']'"`
+	NsMap   NsMap      `parser:"| '#:' @@"`
 	Set     []Form     `parser:"| '#{' @@* '}'"`
 	Map     []MapEntry `parser:"| '{' @@* '}'"`
 	String  *string    `parser:"| @String"`
 	Nil     Nil        `parser:"| @Nil"`
+}
+
+type NsMap struct {
+	Pos   lexer.Position
+	Namespace *string `parser:"@Namespace"`
+	Map []MapEntry `parser:"'{' @@* '}'"`
 }
 
 type MapEntry struct {
@@ -66,10 +73,11 @@ var (
 		{Name: "Keyword", Pattern: `:[#.*+!_?$%&=<-]?[a-zA-Z0-9][a-zA-Z0-9#.*+!_?$%&=<-]*/?[a-zA-Z0-9#.*+!_?$%&=<-]*`},
 		{Name: "String", Pattern: `"(\\"|[^"])*"`},
 		{Name: "Character", Pattern: `\b(\\\w|\\u\d{Name: 4})\b`},
-		{Name: "Symbol", Pattern: `[.+-]?[a-zA-Z][a-zA-Z0-9:#.*+!_?$%&=<-]*/?[a-zA-Z0-9:#.*+!_?$%&=<-]+`},
+		{Name: "Namespace", Pattern: `[A-Za-z0-9_.-]+`},
+		{Name: "Symbol", Pattern: `[.+-]?[A-Za-z][a-zA-Z0-9:#.*+!_?$%&=<-]*/?[a-zA-Z0-9:#.*+!_?$%&=<-]+`},
 		{Name: "Nil", Pattern: `\bnil\b`},
 		{Name: "comment", Pattern: `;[^\n]*|#_(#?\{[^}]*}|\[[^]]*\]|\([^\)]*\)|[^\s]*)`}, // comment
-		{Name: "special", Pattern: `#?[][}{)(]`},
+		{Name: "special", Pattern: `#?[][}{)(:]`},
 		{Name: "whitespace", Pattern: `[,\s]+`},
 })
 
